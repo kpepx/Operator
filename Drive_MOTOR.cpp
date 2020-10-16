@@ -5,9 +5,9 @@
 #include  <SoftwareSerial.h>
 #include <SPI.h>
 
-#define tx_pin  17 //1,17
-#define rx_pin  16 //3,16
-SoftwareSerial Serial1(rx_pin, tx_pin); // RX, TX
+//#define tx_pin  17 //1,17
+//#define rx_pin  16 //3,16
+//SoftwareSerial Serial1(rx_pin, tx_pin); // RX, TX
 int startbit = 0xFF;
 
 #define NUM_TLC5974 1
@@ -224,90 +224,90 @@ void Drive_MOTOR::currentAll() {
   filter(11, 11);
 }
 
-void Drive_MOTOR::writes(int16_t num, int16_t pos, int16_t pwm) {
-  byte Data[5];
-  Data[0] = startbit;
-  Data[1] = num * 0x10 + pos;
-  Data[2] = (pwm >> 8);
-  Data[3] = pwm;
-  Data[4] = (Data[1] + Data[2] + Data[3] + 1) & 0xFF;
-  //****************send*****************//
-  Serial.print(num);
-  Serial.print(",");
-  Serial.println(pos);
-  Serial1.begin(115200);
-  Serial1.write(Data, sizeof(Data));
-  //*************************************//
-}
+//void Drive_MOTOR::writes(int16_t num, int16_t pos, int16_t pwm) {
+//  byte Data[5];
+//  Data[0] = startbit;
+//  Data[1] = num * 0x10 + pos;
+//  Data[2] = (pwm >> 8);
+//  Data[3] = pwm;
+//  Data[4] = (Data[1] + Data[2] + Data[3] + 1) & 0xFF;
+//  //****************send*****************//
+//  Serial.print(num);
+//  Serial.print(",");
+//  Serial.println(pos);
+//  Serial1.begin(115200);
+//  Serial1.write(Data, sizeof(Data));
+//  //*************************************//
+//}
 
-void Drive_MOTOR::write2(int16_t num, int16_t pos) {
-  byte Data[4];
-  Data[0] = startbit;
-  Data[1] = num * 0x10 + (pos >> 8);
-  Data[2] = pos;
-  Data[3] = (Data[1] + Data[2] + 1) & 0xFF;
-  //****************send*****************//
-  Serial1.begin(115200);
-  Serial1.write(Data, sizeof(Data));
-  //  Serial.write(Data, sizeof(Data));
-  //*************************************//
-}
-
-void Drive_MOTOR::read(byte Data) {
-  dat[count] = Data;
-  count++;
-  if (count == 5) {
-    if (dat[0] == startbit) {
-      byte check = (dat[1] + dat[2] + dat[3] + 1) & 0xFF;
-      if (check == dat[4]) {
-        int motor = (dat[1] & 0xF0) >> 4;
-        int pos = dat[1] & 0x0F;
-        int pwm = (dat[2] << 8) + dat[3];
-        //        Drive(motor, pos, pwm);
-        if (motor == 1) {
-          readCurrent();
-        }
-        count = 0;
-      }
-      else {
-        count = 0;
-      }
-    }
-    else {
-      count = 0;
-    }
-  }
-  if (dat[0] != startbit) {
-    count = 0;
-  }
-}
-
-void Drive_MOTOR::read2(byte Data) {
-  dat[count] = Data;
-  count++;
-  if (count == 4) {
-    if (dat[0] == startbit) {
-      byte check = (dat[1] + dat[2] + 1) & 0xFF;
-      if (check == dat[3]) {
-        int motor = (dat[1] & 0xF0) >> 4;
-        int pos = ((dat[1] & 0x0F) << 8) + dat[2];
-        //        DrivePID(motor, pos, 180);
-        //        DrivePID2(motor, pos, 180);
-        //        DrivePID3(motor, pos, 180);
-        //        DrivePID(motor, currentDrive[motor-1], 50);
-        //          Drive(motor,1,4095);
-        //          Drive(motor,0,4095);
-        count = 0;
-      }
-      else {
-        count = 0;
-      }
-    }
-    else {
-      count = 0;
-    }
-  }
-  if (dat[0] != startbit) {
-    count = 0;
-  }
-}
+//void Drive_MOTOR::write2(int16_t num, int16_t pos) {
+//  byte Data[4];
+//  Data[0] = startbit;
+//  Data[1] = num * 0x10 + (pos >> 8);
+//  Data[2] = pos;
+//  Data[3] = (Data[1] + Data[2] + 1) & 0xFF;
+//  //****************send*****************//
+//  Serial1.begin(115200);
+//  Serial1.write(Data, sizeof(Data));
+//  //  Serial.write(Data, sizeof(Data));
+//  //*************************************//
+//}
+//
+//void Drive_MOTOR::read(byte Data) {
+//  dat[count] = Data;
+//  count++;
+//  if (count == 5) {
+//    if (dat[0] == startbit) {
+//      byte check = (dat[1] + dat[2] + dat[3] + 1) & 0xFF;
+//      if (check == dat[4]) {
+//        int motor = (dat[1] & 0xF0) >> 4;
+//        int pos = dat[1] & 0x0F;
+//        int pwm = (dat[2] << 8) + dat[3];
+//        //        Drive(motor, pos, pwm);
+//        if (motor == 1) {
+//          readCurrent();
+//        }
+//        count = 0;
+//      }
+//      else {
+//        count = 0;
+//      }
+//    }
+//    else {
+//      count = 0;
+//    }
+//  }
+//  if (dat[0] != startbit) {
+//    count = 0;
+//  }
+//}
+//
+//void Drive_MOTOR::read2(byte Data) {
+//  dat[count] = Data;
+//  count++;
+//  if (count == 4) {
+//    if (dat[0] == startbit) {
+//      byte check = (dat[1] + dat[2] + 1) & 0xFF;
+//      if (check == dat[3]) {
+//        int motor = (dat[1] & 0xF0) >> 4;
+//        int pos = ((dat[1] & 0x0F) << 8) + dat[2];
+//        //        DrivePID(motor, pos, 180);
+//        //        DrivePID2(motor, pos, 180);
+//        //        DrivePID3(motor, pos, 180);
+//        //        DrivePID(motor, currentDrive[motor-1], 50);
+//        //          Drive(motor,1,4095);
+//        //          Drive(motor,0,4095);
+//        count = 0;
+//      }
+//      else {
+//        count = 0;
+//      }
+//    }
+//    else {
+//      count = 0;
+//    }
+//  }
+//  if (dat[0] != startbit) {
+//    count = 0;
+//  }
+//}

@@ -2,6 +2,7 @@
 #include "Wire.h"
 #include "AllEncoder.h"
 #include "Drive_MOTOR.h"
+#include "Serial_Motor.h"
 
 const uint8_t scl = 22;
 const uint8_t sda = 21;
@@ -12,7 +13,7 @@ boolean callback = false;
 int encoder[11];
 int ver[11];
 AllEncoder Encoder(3200, 360);
-
+Serial_Motor sHand(115200);
 Drive_MOTOR Drive;
 
 hw_timer_t * timer = NULL;
@@ -75,23 +76,25 @@ String x = "";
 
 void setup() {
   //Operator
-  Serial.begin(115200, SERIAL_8N1 , 16, 17);
-  Wire.begin(sda, scl);
+//  Serial.begin(115200, SERIAL_8N1 , 16, 17);
+  Serial.begin(115200);
+//  Wire.begin(sda, scl);
 //  Wire.setClock(400000);
-  Encoder.Config();
-  Drive.begin();
-  pinMode(vr, INPUT);
+//  Encoder.Config();
+//  Drive.begin();
+//  pinMode(vr, INPUT);
   timer = timerBegin(0, 0.001, true);
   timerAttachInterrupt(timer, &serialReceive, true);
-  timerAlarmWrite(timer, 50, true);
+  timerAlarmWrite(timer, 2000, true);
   timerAlarmEnable(timer);
 }
 
 void loop() {
   if (callback == true) {
-    Drive.readCurrent();
-    Drive.currentAll();
-    runMotor();
+    sHand.SetPos(1,1001);
+//    Drive.readCurrent();
+//    Drive.currentAll();
+//    runMotor();
     callback = false;
   }
 }
