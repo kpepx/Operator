@@ -1,0 +1,29 @@
+{
+	"folders": [
+		{
+			"path": "C:\\Users\\PEPPER\\MPLABXProjects\\xy.X"
+		},
+		{
+			"name": "test",
+			"path": "C:\\Users\\PEPPER\\Documents\\PlatformIO\\Projects\\test"
+		},
+		{
+			"name": "motor",
+			"path": "c:\\Users\\PEPPER\\Documents\\PlatformIO\\Projects\\motor"
+		},
+		{
+			"name": "Dxl-master",
+			"path": "..\\Dxl-master"
+		},
+		{
+			"name": "t",
+			"path": "c:\\Users\\PEPPER\\Documents\\PlatformIO\\Projects\\t"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"xmemory0": "cpp",
+			"xlocale": "cpp"
+		}
+	}
+}

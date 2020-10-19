@@ -5,9 +5,9 @@
 #include  <SoftwareSerial.h>
 #include <SPI.h>
 
-//#define tx_pin  17 //1,17
-//#define rx_pin  16 //3,16
-//SoftwareSerial Serial1(rx_pin, tx_pin); // RX, TX
+#define tx_pin  17 //1,17
+#define rx_pin  16 //3,16
+SoftwareSerial Serial1(rx_pin, tx_pin); // RX, TX
 int startbit = 0xFF;
 
 #define NUM_TLC5974 1

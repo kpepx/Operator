@@ -3,64 +3,64 @@
 #include "AllFiveEncoder.h"
 #include "Wire.h"
 
-Encoder encoder11("GND");
-Encoder encoder12("DCOILP");
-Encoder encoder13("DCOILN");
-Encoder encoder14("DVCC_SE");
-Encoder encoder15("VCC");
+Encoder encoder1("GND");
+Encoder encoder2("DCOILP");
+Encoder encoder3("DCOILN");
+Encoder encoder4("DVCC_SE");
+Encoder encoder5("VCC");
 
 void AllFiveEncoder::Config(bool LowP, bool SPD, uint8_t OVS, uint16_t RES){
-  encoder11.SetLowPowerModeOn(LowP);
-  encoder11.SetSpeedModeOn(SPD);
-  encoder11.SetOversampling(OVS);
-  encoder11.SetResolution(RES);
-  encoder11.Config();
+  encoder1.SetLowPowerModeOn(LowP);
+  encoder1.SetSpeedModeOn(SPD);
+  encoder1.SetOversampling(OVS);
+  encoder1.SetResolution(RES);
+  encoder1.Config();
   
-  encoder12.SetLowPowerModeOn(LowP);
-  encoder12.SetSpeedModeOn(SPD);
-  encoder12.SetOversampling(OVS);
-  encoder12.SetResolution(RES);
-  encoder12.Config();
+  encoder2.SetLowPowerModeOn(LowP);
+  encoder2.SetSpeedModeOn(SPD);
+  encoder2.SetOversampling(OVS);
+  encoder2.SetResolution(RES);
+  encoder2.Config();
   
-  encoder13.SetLowPowerModeOn(LowP);
-  encoder13.SetSpeedModeOn(SPD);
-  encoder13.SetOversampling(OVS);
-  encoder13.SetResolution(RES);
-  encoder13.Config();
+  encoder3.SetLowPowerModeOn(LowP);
+  encoder3.SetSpeedModeOn(SPD);
+  encoder3.SetOversampling(OVS);
+  encoder3.SetResolution(RES);
+  encoder3.Config();
   
-  encoder14.SetLowPowerModeOn(LowP);
-  encoder14.SetSpeedModeOn(SPD);
-  encoder14.SetOversampling(OVS);
-  encoder14.SetResolution(RES);
-  encoder14.Config();
+  encoder4.SetLowPowerModeOn(LowP);
+  encoder4.SetSpeedModeOn(SPD);
+  encoder4.SetOversampling(OVS);
+  encoder4.SetResolution(RES);
+  encoder4.Config();
   
-  encoder15.SetLowPowerModeOn(LowP);
-  encoder15.SetSpeedModeOn(SPD);
-  encoder15.SetOversampling(OVS);
-  encoder15.SetResolution(RES);
-  encoder15.Config();
+  encoder5.SetLowPowerModeOn(LowP);
+  encoder5.SetSpeedModeOn(SPD);
+  encoder5.SetOversampling(OVS);
+  encoder5.SetResolution(RES);
+  encoder5.Config();
 }
 
 void AllFiveEncoder::Read(){
   if(GNDisReady==1){
-    encoder11.Read();
-    MAG[0] = int(encoder11.GetMagneticAngle());
+    encoder1.Read();
+    MAG[0] = int(encoder1.GetMagneticAngle());
   }
   if(DCOILPisReady==1){
-    encoder12.Read();
-    MAG[1] = int(encoder12.GetMagneticAngle());
+    encoder2.Read();
+    MAG[1] = int(encoder2.GetMagneticAngle());
     }
   if(DCOILNisReady==1){
-    encoder13.Read();
-    MAG[2] = int(encoder13.GetMagneticAngle());
+    encoder3.Read();
+    MAG[2] = int(encoder3.GetMagneticAngle());
   }
   if(DVCC_SEisReady==1){
-    encoder14.Read();
-    MAG[3] = int(encoder14.GetMagneticAngle());
+    encoder4.Read();
+    MAG[3] = int(encoder4.GetMagneticAngle());
   }
   if(VCCisReady==1){
-    encoder15.Read();
-    MAG[4] = int(encoder15.GetMagneticAngle());
+    encoder5.Read();
+    MAG[4] = int(encoder5.GetMagneticAngle());
     }
 }
 
